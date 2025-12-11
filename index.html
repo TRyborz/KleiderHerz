@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KleiderHerz e.V. - Startseite</title>
+    <link rel="icon" href="images/Logo.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet">
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm py-3">
+        <div class="container flex-column">
+            
+            <a class="navbar-brand mx-auto mb-3" href="index.html">
+                <img src="images/Logo.png" alt="Logo" height="80"> 
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav mx-auto gap-4 text-uppercase fw-bold">
+                    <li class="nav-item">
+                        <a class="nav-link text-warning active" href="index.html">Startseite</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="kontakt.html">Kontakt</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="info.html">Info</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6"> <div class="card shadow border-0">
+                    <div class="card-body p-4 p-md-5">
+
+                        <div id="registration-section">
+                            <h2 class="mb-4 text-center text-primary">Spende registrieren</h2>
+                            
+                            <form id="donationForm">
+                                <div class="mb-4">
+                                    <label class="form-label fw-bold">Wie möchtest du spenden?</label>
+                                    <div class="card p-3 bg-light border-0">
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input" type="radio" name="handoverType" id="typeOffice" value="office" checked onchange="toggleAddress(false)">
+                                            <label class="form-check-label" for="typeOffice">Persönliche Übergabe an Geschäftsstelle</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="handoverType" id="typePickup" value="pickup" onchange="toggleAddress(true)">
+                                            <label class="form-check-label" for="typePickup">Abholung durch Sammelfahrzeug</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="addressFields" class="d-none mb-4">
+                                    <h5 class="text-secondary mb-2">Abholadresse</h5>
+                                    
+                                    <div class="alert alert-info py-2 mb-3 border-0 bg-opacity-10 bg-info text-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill me-2" viewBox="0 0 16 16">
+                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                        </svg>
+                                        <small><strong>Hinweis:</strong> Unser Sammelfahrzeug fährt aktuell nur im Raum Stuttgart (PLZ beginnt mit 70...).</small>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-sm-4">
+                                            <label for="zipCode" class="form-label">Postleitzahl</label>
+                                            <input type="text" class="form-control" id="zipCode" placeholder="PLZ">
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <label for="street" class="form-label">Straße & Nr.</label>
+                                            <input type="text" class="form-control" id="street" placeholder="Musterstraße 1">
+                                        </div>
+                                    </div>
+                                    <div id="zipError" class="alert alert-danger mt-2 d-none py-2">
+                                        <small>Abholung leider nicht möglich (zu weit entfernt).</small>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="clothesType" class="form-label fw-bold">Art der Kleidung</label>
+                                    <select class="form-select" id="clothesType" required>
+                                        <option selected disabled value="">Bitte wählen...</option>
+                                        <option value="Winterkleidung">Winterkleidung</option>
+                                        <option value="Sommerkleidung">Sommerkleidung</option>
+                                        <option value="Schuhe">Schuhe</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="crisisRegion" class="form-label fw-bold">Ziel-Krisenregion</label>
+                                    <select class="form-select" id="crisisRegion" required>
+                                        <option selected disabled value="">Bitte wählen...</option>
+                                        <option value="Region A">Region A (Erdbebengebiet)</option>
+                                        <option value="Region B">Region B (Hochwasser)</option>
+                                        <option value="Region C">Region C (Stuttgart)</option>
+                                    </select>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-success btn-lg">Spende jetzt registrieren</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div id="success-section" class="d-none text-center">
+                            <div class="mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="text-success bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                </svg>
+                            </div>
+                            <h4 class="alert-heading text-success">Vielen Dank!</h4>
+                            <p>Deine Spende wurde erfolgreich registriert.</p>
+                            <div class="bg-light p-3 rounded text-start border" id="summary">
+                                </div>
+                            <button class="btn btn-primary mt-4" onclick="location.reload()">Neue Spende</button>
+                        </div>
+
+                    </div>
+                </div> </div>
+        </div>
+    </main>
+
+    <footer class="bg-white text-center text-lg-start mt-auto py-3 border-top">
+        <div class="container text-center">
+            <span class="text-muted small">
+                © 2025 KleiderHerz e.V. | 
+                <a href="impressum.html" class="text-decoration-none text-secondary">Impressum</a> | 
+                <a href="datenschutz.html" class="text-decoration-none text-secondary">Datenschutz</a>
+            </span>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
