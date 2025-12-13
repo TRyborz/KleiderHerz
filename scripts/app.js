@@ -1,5 +1,5 @@
 // Konfiguration: Die PLZ der Geschäftsstelle
-const OFFICE_ZIP = "70173"; // Beispiel (Stuttgart)
+const OFFICE_ZIP = "70173"; // Stuttgart
 
 // Hilfsfunktion: Umschalten der Adressfelder
 function toggleAddress(show) {
@@ -19,7 +19,6 @@ function toggleAddress(show) {
     }
 }
 
-// Event Listener für das Absenden des Formulars
 document.getElementById('donationForm').addEventListener('submit', function(e) {
     e.preventDefault(); // Verhindert das Neuladen der Seite
 
@@ -27,25 +26,33 @@ document.getElementById('donationForm').addEventListener('submit', function(e) {
     const isPickup = document.getElementById('typePickup').checked;
     const clothesType = document.getElementById('clothesType').value;
     const region = document.getElementById('crisisRegion').value;
-    const zip = document.getElementById('zipCode').value;
+    const zip = document.getElementById('zipCode').value; 
     const street = document.getElementById('street').value;
     const zipError = document.getElementById('zipError');
 
-    // Validierung für Abholung (Anforderung h)
+    // Validierung für Abholung 
     if (isPickup) {
-        // Prüfe ob die ersten 2 Ziffern übereinstimmen
+       
+        const zipPattern = /^\d{5}$/;
+
+        if (!zipPattern.test(zip)) {
+            zipError.textContent = "Bitte gib eine gültige 5-stellige Postleitzahl ein."; // Fehlermeldng
+            zipError.classList.remove('d-none'); // Fehler anzeigen
+            return; 
+        }
+
         const officePrefix = OFFICE_ZIP.substring(0, 2);
         const userPrefix = zip.substring(0, 2);
 
         if (userPrefix !== officePrefix) {
+            zipError.textContent = "Abholung leider nicht möglich (zu weit entfernt).";
             zipError.classList.remove('d-none');
-            return; // Stoppt hier
+            return;
         } else {
             zipError.classList.add('d-none');
         }
     }
 
-    // Wenn alles ok ist: Bestätigung anzeigen (Anforderung i)
     const now = new Date();
     const timestamp = now.toLocaleDateString() + " um " + now.toLocaleTimeString() + " Uhr";
     
@@ -54,7 +61,6 @@ document.getElementById('donationForm').addEventListener('submit', function(e) {
         locationText = `Abholung bei: ${street}, ${zip}`;
     }
 
-    // Zusammenfassung bauen
     const summaryHtml = `
         <strong>Art:</strong> ${clothesType}<br>
         <strong>Krisengebiet:</strong> ${region}<br>
